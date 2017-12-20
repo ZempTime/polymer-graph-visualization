@@ -51,6 +51,7 @@ while(queue.length > 0) {
     var newNode = {
       id: ('n' + nodes.length),
       label: item.tagName.toLowerCase(),
+      attributes: JSON.stringify(item.attributes),
       x: index,
       y: (targetNode.y - 1)
     };
@@ -114,7 +115,8 @@ var buildNodeLiteral = (graph, targetNode, parent) => {
 
   var obj = {
     "name": targetNode.label,
-    "parent": parent.label
+    "parent": parent.label,
+    "attributes": JSON.parse(targetNode.attributes),
   };
 
   if (children) obj["children"] = children;
@@ -126,4 +128,3 @@ var nestedTreeData = buildNestedTree(graph);
 
 copy(nestedTreeData);
 console.log("Data copied to your clipboard! Please past it into 'treeData.json' and refresh 'treeView.html'. See the readme at https://github.com/ZempTime/polymer-graph-visualization for more details.");
-
